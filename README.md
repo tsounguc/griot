@@ -23,6 +23,7 @@ This repo is the evolving codebase behind the [blog series](https://tsounguicode
 Each folder represents a mental function:
 
 - `user_input/`: handles speech input or tap triggers
+- `understand/`: transcribe and analyze for meaning
 - `model_context/`: tracks who you are and how you’re evolving
 - `remember/`: saves memories, sessions, logs
 - `reflect/`: wraps GPT + logic to create meaningful responses
