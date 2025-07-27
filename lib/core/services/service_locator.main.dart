@@ -11,18 +11,34 @@ Future<void> _initUserInput() async {
   serviceLocator
     // App Logic
     ..registerFactory(
-      () => WakeWordCubit(listenForWakeWord: serviceLocator()),
+      () => WakeWordCubit(
+        listenForWakeWord: serviceLocator(),
+        speakResponse: serviceLocator(),
+      ),
     )
     // Use cases
     ..registerLazySingleton(() => ListenForWakeWord(serviceLocator()))
+    ..registerLazySingleton(() => SpeakResponse(serviceLocator()))
     // Repositories
     ..registerLazySingleton<UserInputRepository>(
       () => UserInputRepositoryImpl(serviceLocator()),
+    )
+    ..registerLazySingleton<VoiceResponderRepository>(
+      () => VoiceResponderRepositoryImpl(serviceLocator()),
     )
     // Data Source
     ..registerLazySingleton<WakeWordListener>(
       WakeWordListenerImpl.new,
     )
+    ..registerLazySingleton<VoiceResponder>(
+      () => VoiceResponderImpl(serviceLocator()),
+    )
     // External dependencies
+    ..registerLazySingleton(
+      () => FlutterTts()
+        ..setLanguage('en-US')
+        ..setPitch(1)
+        ..setSpeechRate(0.45),
+    )
     ..registerLazySingleton(() => prefs);
 }

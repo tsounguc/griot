@@ -27,6 +27,7 @@ class WakeWordListenerImpl implements WakeWordListener {
           onWakeWordDetected();
         }
       },
+      sensitivities: [0.8],
     );
 
     await _manager.start();

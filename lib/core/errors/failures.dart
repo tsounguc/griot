@@ -37,14 +37,40 @@ abstract class UserInputFailure extends Failure {
   UserInputFailure({required super.message, required super.statusCode});
 }
 
-
 class WakeWordFailure extends UserInputFailure {
-  WakeWordFailure({required super.message, required super.statusCode});
+  WakeWordFailure({
+    required super.message,
+    required super.statusCode,
+  });
 
   /// Converts a [WakeWordException] into a [WakeWordFailure].
   WakeWordFailure.fromException(WakeWordException exception)
-      : this(
-    message: exception.message,
-    statusCode: exception.statusCode,
-  );
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
+}
+
+/// **Base class for all voice responder failures.**
+///
+/// This allows us to have specific failure types.
+abstract class VoiceResponderFailure extends Failure {
+  VoiceResponderFailure({
+    required super.message,
+    required super.statusCode,
+  });
+}
+
+class SpeakResponseFailure extends VoiceResponderFailure {
+  SpeakResponseFailure({
+    required super.message,
+    required super.statusCode,
+  });
+
+  /// Converts a [SpeakResponseException] into a [SpeakResponseFailure].
+  SpeakResponseFailure.fromException(SpeakResponseException exception)
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
 }

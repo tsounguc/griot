@@ -4,7 +4,9 @@ import 'package:griot/features/user_input/domain/repositories/user_input_reposit
 
 class ListenForWakeWord extends UseCaseWithParams<void, Function> {
   const ListenForWakeWord(this.repository);
+
   final UserInputRepository repository;
+
   @override
   ResultFuture<void> call(Function params) => repository.listenForWakeWord(params);
 }
